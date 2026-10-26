@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>React Spectrum Picker repro</title>
+  <style>
+    body { font: 16px/1.5 system-ui, sans-serif; margin: 2rem; max-width: 46rem; }
+    table { border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.3rem 0.8rem; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>React Spectrum Picker repro</h1>
+  <p>
+    Pick a number of items, then click the Picker to open it. Each time it opens, the table shows how long that took,
+    from the click until the list had been drawn.
+  </p>
+  <div id="root"></div>
+  <script type="module" src="/main.js"></script>
+</body>
+</html>
