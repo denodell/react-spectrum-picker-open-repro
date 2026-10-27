@@ -7,7 +7,6 @@ let start = 0;
 let frames = [];
 let observer;
 
-// Start timing when the click begins, and record any frame over 50ms until the list has been drawn.
 document.addEventListener("pointerdown", (event) => {
   if (!event.target.closest("[data-picker] button")) return;
   start = performance.now();
