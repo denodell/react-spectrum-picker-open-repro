@@ -1,6 +1,6 @@
 # React Spectrum Picker repro
 
-When a React Spectrum `Picker` opens, the browser works out the page's styles and layout over and over, once for each visible option, before the list can be drawn. The list is virtualized, so the number of items doesn't change this. It takes about the same amount of time to open with 125 items as with 250.
+When a React Spectrum `Picker` opens, the browser works out the page's styles and layout over and over, several times for each visible option, before the list can be drawn. The list is virtualized, so the number of items doesn't change this. It takes about the same amount of time to open with 125 items as with 250.
 
 ## Run it
 
@@ -18,11 +18,9 @@ Record the Picker opening in the Performance panel of Chrome's developer tools, 
 - The main thread shows a long run of short **Recalculate style** and **Layout** events. In my recording, rendering 17 visible options took 133 layouts and about 150 style recalculations.
 - In the Bottom-Up tab, `checkVisibility` is near the top, called from `isElementVisible` in `useVirtualizerItem`.
 
-On an M1 Pro MacBook Pro in Chrome 155, with the CPU slowed down 4x, the Picker took 227ms to open, and the page was unresponsive for 162ms of that.
-
 ## Where it comes from
 
-`useVirtualizerItem` measures each visible option in its own layout effect. For each one, `isElementVisible()` calls `checkVisibility()`, then `getSize()` clears `node.style.height`, reads `scrollWidth` and `scrollHeight`, and puts the height back. Because each option changes a style and then reads a size, the browser has to work out the styles and layout again for every option.
+`useVirtualizerItem` measures each visible option in its own layout effect. For each one, `isElementVisible()` calls `checkVisibility()`, then `getSize()` clears `node.style.height`, reads `scrollWidth` and `scrollHeight`, and puts the height back. Because each option changes a style and then reads a size, the browser has to work out the styles and layout again, several times for every option.
 
 Measuring the visible options in one pass would avoid this: clear the heights of all of them first, then read all their sizes, then put the heights back, so the browser only works out the layout once.
 
