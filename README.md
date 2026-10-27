@@ -11,7 +11,7 @@ npm start
 
 Then open the page it serves, pick 125 or 250 items, and click the Picker to open it. The table shows how long it took from the click until the list had been drawn, and the longest frame while it opened.
 
-Record the Picker opening in the Performance panel of Chrome's developer tools, with the CPU slowed down 4x:
+If you record the Picker opening in the Performance panel of Chrome's developer tools, with the CPU slowed down 4x, you'll see:
 
 - The main thread shows a long run of short **Recalculate style** and **Layout** events. In my recording, rendering 17 visible options took 133 layouts and about 150 style recalculations.
 - In the Bottom-Up tab, `checkVisibility` is near the top, called from `isElementVisible` in `useVirtualizerItem`.
