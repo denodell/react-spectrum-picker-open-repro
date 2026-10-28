@@ -1,5 +1,7 @@
 # React Spectrum Picker repro
 
+On this branch, `npm install` also applies the changes from [adobe/react-spectrum#10886](https://github.com/adobe/react-spectrum/pull/10886) to the installed `react-aria`, so you can compare it with the `main` branch. The changes are in `patch/`.
+
 When a React Spectrum `Picker` opens, the browser works out the page's styles and layout over and over, several times for each visible option, before the list can be drawn. The list is virtualized, so the number of items doesn't change this. It takes about the same amount of time to open with 125 items as with 250.
 
 To run it:

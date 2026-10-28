@@ -4,6 +4,7 @@
   "type": "module",
   "description": "Shows that React Spectrum's Picker works out the page layout once per visible option when it opens.",
   "scripts": {
+    "postinstall": "node patch/apply.js",
     "start": "vite",
     "build": "vite build"
   },
